@@ -2,11 +2,15 @@ import grpc
 import time
 from concurrent import futures
 import udaconnect_pb2_grpc
-from rpcservices import PersonServicer
+from rpcservices import (
+    PersonServicer,
+    LocationServicer,
+)
 
 
 server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
 udaconnect_pb2_grpc.add_PersonServicer_to_server(PersonServicer(), server)
+udaconnect_pb2_grpc.add_LocationServicer_to_server(LocationServicer(), server)
 
 SERVER_PORT = 5005
 

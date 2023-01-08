@@ -33,7 +33,7 @@ class LocationResource(Resource):
 
     @responds(schema=LocationSchema)
     def get(self, location_id) -> Location:
-        location: Location = LocationService.retrieve(location_id)
+        location: Location = LocationService.retrieve(int(location_id))
         return location
 
 

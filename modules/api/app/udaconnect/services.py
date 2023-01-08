@@ -14,9 +14,11 @@ from udaconnect_pb2 import (
     CreatePersonRequest,
     GetPersonRequest,
     GetAllPersonRequest,
+    GetLocationRequest,
 )
 from udaconnect_pb2_grpc import (
-    PersonStub
+    PersonStub,
+    LocationStub,
 )
 
 logging.basicConfig(level=logging.WARNING)
@@ -26,7 +28,9 @@ CORE_HOST = os.environ["CORE_HOST"]
 CORE_PORT = os.environ["CORE_PORT"]
 
 channel = grpc.insecure_channel(f"{CORE_HOST}:{CORE_PORT}")
+
 person_stub = PersonStub(channel)
+location_stub = LocationStub(channel)
 
 class ConnectionService:
     @staticmethod
@@ -100,14 +104,13 @@ class ConnectionService:
 class LocationService:
     @staticmethod
     def retrieve(location_id) -> Location:
-        location, coord_text = (
-            db.session.query(Location, Location.coordinate.ST_AsText())
-            .filter(Location.id == location_id)
-            .one()
+        resp = location_stub.Get(GetLocationRequest(id=location_id))
+        location = Location(
+            id=resp.data.id,
+            person_id=resp.data.person_id,
+            creation_time=datetime.fromtimestamp(resp.data.creation_time),
         )
-
-        # Rely on database to return text form of point to reduce overhead of conversion in app code
-        location.wkt_shape = coord_text
+        location.set_wkt_with_coords(resp.data.latitude, resp.data.longitude)
         return location
 
     @staticmethod

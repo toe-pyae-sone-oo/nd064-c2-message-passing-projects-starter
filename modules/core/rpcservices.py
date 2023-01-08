@@ -3,15 +3,18 @@ from udaconnect_pb2 import (
     GetPersonResponse,
     CreatePersonResponse,
     GetAllPersonResponse,
+    LocationMessage,
+    GetLocationResponse,
 )
-from udaconnect_pb2_grpc import (
-    PersonServicer
-)
+import udaconnect_pb2_grpc
 from app import app
-from services import PersonService
+from services import (
+    PersonService,
+    LocationService,
+)
 
 
-class PersonServicer(PersonServicer):
+class PersonServicer(udaconnect_pb2_grpc.PersonServicer):
 
     def Get(self, request, context):
         with app.app_context():
@@ -54,3 +57,18 @@ class PersonServicer(PersonServicer):
                 ), person_list)
             )
             return GetAllPersonResponse(list=person_message_list)
+
+class LocationServicer(udaconnect_pb2_grpc.LocationServicer):
+    
+    def Get(self, request, context):
+        with app.app_context():
+            location = LocationService.retrieve(request.id)
+            return GetLocationResponse(
+                data=LocationMessage(
+                    id=location.id,
+                    person_id=location.person_id,
+                    longitude=location.longitude,
+                    latitude=location.latitude,
+                    creation_time=int(location.creation_time.timestamp())
+                )
+            )

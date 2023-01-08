@@ -29,8 +29,28 @@ message GetAllPersonResponse {
     repeated PersonMessage list = 1;
 }
 
+message LocationMessage {
+    int64 id = 1;
+    int64 person_id = 2;
+    string longitude = 3;
+    string latitude = 4;
+    int64 creation_time = 5;
+}
+
+message GetLocationRequest {
+    int64 id = 1;
+}
+
+message GetLocationResponse {
+    LocationMessage data = 1;
+}
+
 service Person {
     rpc Get(GetPersonRequest) returns (GetPersonResponse);
     rpc Create(CreatePersonRequest) returns (CreatePersonResponse);
     rpc GetAll(GetAllPersonRequest) returns (GetAllPersonResponse);
+}
+
+service Location {
+    rpc Get(GetLocationRequest) returns (GetLocationResponse);
 }
