@@ -10,8 +10,14 @@ from app.udaconnect.schemas import ConnectionSchema, LocationSchema, PersonSchem
 from geoalchemy2.functions import ST_AsText, ST_Point
 from sqlalchemy.sql import text
 
-import udaconnect_pb2
-import udaconnect_pb2_grpc
+from udaconnect_pb2 import (
+    CreatePersonRequest,
+    GetPersonRequest,
+    GetAllPersonRequest,
+)
+from udaconnect_pb2_grpc import (
+    PersonStub
+)
 
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("udaconnect-api")
@@ -20,7 +26,7 @@ CORE_HOST = os.environ["CORE_HOST"]
 CORE_PORT = os.environ["CORE_PORT"]
 
 channel = grpc.insecure_channel(f"{CORE_HOST}:{CORE_PORT}")
-person_stub = udaconnect_pb2_grpc.PersonStub(channel)
+person_stub = PersonStub(channel)
 
 class ConnectionService:
     @staticmethod
@@ -124,7 +130,7 @@ class LocationService:
 class PersonService:
     @staticmethod
     def create(person: Dict) -> Person:
-        resp = person_stub.Create(udaconnect_pb2.CreatePersonRequest(
+        resp = person_stub.Create(CreatePersonRequest(
             first_name=person["first_name"],
             last_name=person["last_name"],
             company_name=person["company_name"],
@@ -138,7 +144,7 @@ class PersonService:
 
     @staticmethod
     def retrieve(person_id: int) -> Person:
-        resp = person_stub.Get(udaconnect_pb2.GetPersonRequest(id=person_id))
+        resp = person_stub.Get(GetPersonRequest(id=person_id))
         return Person(
             id=resp.data.id,
             first_name=resp.data.first_name,
@@ -149,7 +155,7 @@ class PersonService:
 
     @staticmethod
     def retrieve_all() -> List[Person]:
-        resp = person_stub.GetAll(udaconnect_pb2.GetAllPersonRequest())
+        resp = person_stub.GetAll(GetAllPersonRequest())
         return list(
             map(lambda person: Person(
                 id=person.id,
