@@ -19,12 +19,34 @@ class PersonStub(object):
                 request_serializer=udaconnect__pb2.GetPersonRequest.SerializeToString,
                 response_deserializer=udaconnect__pb2.GetPersonResponse.FromString,
                 )
+        self.Create = channel.unary_unary(
+                '/Person/Create',
+                request_serializer=udaconnect__pb2.CreatePersonRequest.SerializeToString,
+                response_deserializer=udaconnect__pb2.CreatePersonResponse.FromString,
+                )
+        self.GetAll = channel.unary_unary(
+                '/Person/GetAll',
+                request_serializer=udaconnect__pb2.GetAllPersonRequest.SerializeToString,
+                response_deserializer=udaconnect__pb2.GetAllPersonResponse.FromString,
+                )
 
 
 class PersonServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def Get(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Create(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAll(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -37,6 +59,16 @@ def add_PersonServicer_to_server(servicer, server):
                     servicer.Get,
                     request_deserializer=udaconnect__pb2.GetPersonRequest.FromString,
                     response_serializer=udaconnect__pb2.GetPersonResponse.SerializeToString,
+            ),
+            'Create': grpc.unary_unary_rpc_method_handler(
+                    servicer.Create,
+                    request_deserializer=udaconnect__pb2.CreatePersonRequest.FromString,
+                    response_serializer=udaconnect__pb2.CreatePersonResponse.SerializeToString,
+            ),
+            'GetAll': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAll,
+                    request_deserializer=udaconnect__pb2.GetAllPersonRequest.FromString,
+                    response_serializer=udaconnect__pb2.GetAllPersonResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -62,5 +94,39 @@ class Person(object):
         return grpc.experimental.unary_unary(request, target, '/Person/Get',
             udaconnect__pb2.GetPersonRequest.SerializeToString,
             udaconnect__pb2.GetPersonResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Create(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Person/Create',
+            udaconnect__pb2.CreatePersonRequest.SerializeToString,
+            udaconnect__pb2.CreatePersonResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAll(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Person/GetAll',
+            udaconnect__pb2.GetAllPersonRequest.SerializeToString,
+            udaconnect__pb2.GetAllPersonResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

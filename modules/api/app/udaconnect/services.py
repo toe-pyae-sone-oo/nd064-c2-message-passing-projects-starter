@@ -124,15 +124,17 @@ class LocationService:
 class PersonService:
     @staticmethod
     def create(person: Dict) -> Person:
-        new_person = Person()
-        new_person.first_name = person["first_name"]
-        new_person.last_name = person["last_name"]
-        new_person.company_name = person["company_name"]
-
-        db.session.add(new_person)
-        db.session.commit()
-
-        return new_person
+        resp = person_stub.Create(udaconnect_pb2.CreatePersonRequest(
+            first_name=person["first_name"],
+            last_name=person["last_name"],
+            company_name=person["company_name"],
+        ))
+        return Person(
+            id=resp.data.id,
+            first_name=resp.data.first_name,
+            last_name=resp.data.last_name,
+            company_name=resp.data.company_name,
+        )
 
     @staticmethod
     def retrieve(person_id: int) -> Person:
@@ -147,4 +149,12 @@ class PersonService:
 
     @staticmethod
     def retrieve_all() -> List[Person]:
-        return db.session.query(Person).all()
+        resp = person_stub.GetAll(udaconnect_pb2.GetAllPersonRequest())
+        return list(
+            map(lambda person: Person(
+                id=person.id,
+                first_name=person.first_name,
+                last_name=person.last_name,
+                company_name=person.company_name,
+            ), resp.list)
+        )

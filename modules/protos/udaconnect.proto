@@ -15,6 +15,22 @@ message GetPersonResponse {
     PersonMessage data = 1;
 }
 
+message CreatePersonRequest {
+    PersonMessage payload = 1;
+}
+
+message CreatePersonResponse {
+    PersonMessage data = 1;
+}
+
+message GetAllPersonRequest {}
+
+message GetAllPersonResponse {
+    repeated PersonMessage list = 1;
+}
+
 service Person {
     rpc Get(GetPersonRequest) returns (GetPersonResponse);
+    rpc Create(CreatePersonRequest) returns (CreatePersonResponse);
+    rpc GetAll(GetAllPersonRequest) returns (GetAllPersonResponse);
 }
