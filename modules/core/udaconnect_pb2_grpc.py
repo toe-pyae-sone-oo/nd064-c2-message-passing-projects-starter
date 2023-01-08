@@ -146,12 +146,23 @@ class LocationStub(object):
                 request_serializer=udaconnect__pb2.GetLocationRequest.SerializeToString,
                 response_deserializer=udaconnect__pb2.GetLocationResponse.FromString,
                 )
+        self.Create = channel.unary_unary(
+                '/Location/Create',
+                request_serializer=udaconnect__pb2.CreateLocationRequest.SerializeToString,
+                response_deserializer=udaconnect__pb2.CreateLocationResponse.FromString,
+                )
 
 
 class LocationServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def Get(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Create(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -164,6 +175,11 @@ def add_LocationServicer_to_server(servicer, server):
                     servicer.Get,
                     request_deserializer=udaconnect__pb2.GetLocationRequest.FromString,
                     response_serializer=udaconnect__pb2.GetLocationResponse.SerializeToString,
+            ),
+            'Create': grpc.unary_unary_rpc_method_handler(
+                    servicer.Create,
+                    request_deserializer=udaconnect__pb2.CreateLocationRequest.FromString,
+                    response_serializer=udaconnect__pb2.CreateLocationResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -189,6 +205,23 @@ class Location(object):
         return grpc.experimental.unary_unary(request, target, '/Location/Get',
             udaconnect__pb2.GetLocationRequest.SerializeToString,
             udaconnect__pb2.GetLocationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Create(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Location/Create',
+            udaconnect__pb2.CreateLocationRequest.SerializeToString,
+            udaconnect__pb2.CreateLocationResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

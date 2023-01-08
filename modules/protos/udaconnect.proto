@@ -45,6 +45,14 @@ message GetLocationResponse {
     LocationMessage data = 1;
 }
 
+message CreateLocationRequest {
+    LocationMessage payload = 1;
+}
+
+message CreateLocationResponse {
+    LocationMessage data = 1;
+}
+
 message ConnectionMessage {
     LocationMessage location = 1;
     PersonMessage person = 2;
@@ -69,6 +77,7 @@ service Person {
 
 service Location {
     rpc Get(GetLocationRequest) returns (GetLocationResponse);
+    rpc Create(CreateLocationRequest) returns (CreateLocationResponse);
 }
 
 service Connection {
