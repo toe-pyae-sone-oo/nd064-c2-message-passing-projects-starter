@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: udaconnect-kafka-consumer
+  name: udaconnect-kafka-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: udaconnect-kafka-consumer
+  template:
+    metadata:
+      labels:
+        service: udaconnect-kafka-consumer
+    spec:
+      containers:
+      - image: tpso/udaconnect-kafka-consumer:latest
+        name: udaconnect-core
+        imagePullPolicy: Always
+        env:
+        - name: KAFKA_SERVER
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-env
+              key: KAFKA_SERVER
+        - name: KAFKA_TOPIC
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-env
+              key: KAFKA_TOPIC
+        - name: "PYTHONUNBUFFERED"
+          value: "0"
+      restartPolicy: Always
