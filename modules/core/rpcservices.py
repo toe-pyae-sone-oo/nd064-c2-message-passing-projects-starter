@@ -5,14 +5,20 @@ from udaconnect_pb2 import (
     GetAllPersonResponse,
     LocationMessage,
     GetLocationResponse,
+    ConnectionMessage,
+    FindContactsResponse,
 )
 import udaconnect_pb2_grpc
 from app import app
 from services import (
     PersonService,
     LocationService,
+    ConnectionService,
 )
+from datetime import datetime
 
+
+DATE_FORMAT = "%Y-%m-%d"
 
 class PersonServicer(udaconnect_pb2_grpc.PersonServicer):
 
@@ -72,3 +78,35 @@ class LocationServicer(udaconnect_pb2_grpc.LocationServicer):
                     creation_time=int(location.creation_time.timestamp())
                 )
             )
+
+class ConnectionServicer(udaconnect_pb2_grpc.ConnectionServicer):
+
+    def FindContacts(self, request, context):
+        start_date = datetime.strptime(request.start_date, DATE_FORMAT)
+        end_date = datetime.strptime(request.end_date, DATE_FORMAT)
+
+        with app.app_context():
+            contacts = ConnectionService.find_contacts(
+                request.person_id,
+                start_date,
+                end_date,
+                request.distance,
+            )
+            
+            connection_messages = list(map(lambda contact: ConnectionMessage(
+                location=LocationMessage(
+                    id=contact.location.id,
+                    person_id=contact.location.person_id,
+                    longitude=contact.location.longitude,
+                    latitude=contact.location.latitude,
+                    creation_time=int(contact.location.creation_time.timestamp())
+                ),
+                person=PersonMessage(
+                    id=contact.person.id,
+                    first_name=contact.person.first_name,
+                    last_name=contact.person.last_name,
+                    company_name=contact.person.company_name,
+                ),
+            ), contacts))
+
+            return FindContactsResponse(contacts=connection_messages)

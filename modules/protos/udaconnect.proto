@@ -45,6 +45,22 @@ message GetLocationResponse {
     LocationMessage data = 1;
 }
 
+message ConnectionMessage {
+    LocationMessage location = 1;
+    PersonMessage person = 2;
+}
+
+message FindContactsRequest {
+    int64 person_id = 1;
+    string start_date = 2;
+    string end_date = 3;
+    int64 distance = 4;
+}
+
+message FindContactsResponse {
+    repeated ConnectionMessage contacts = 1;
+}
+
 service Person {
     rpc Get(GetPersonRequest) returns (GetPersonResponse);
     rpc Create(CreatePersonRequest) returns (CreatePersonResponse);
@@ -53,4 +69,8 @@ service Person {
 
 service Location {
     rpc Get(GetLocationRequest) returns (GetLocationResponse);
+}
+
+service Connection {
+    rpc FindContacts(FindContactsRequest) returns (FindContactsResponse);
 }

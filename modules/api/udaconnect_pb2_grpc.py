@@ -191,3 +191,64 @@ class Location(object):
             udaconnect__pb2.GetLocationResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+
+class ConnectionStub(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.FindContacts = channel.unary_unary(
+                '/Connection/FindContacts',
+                request_serializer=udaconnect__pb2.FindContactsRequest.SerializeToString,
+                response_deserializer=udaconnect__pb2.FindContactsResponse.FromString,
+                )
+
+
+class ConnectionServicer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def FindContacts(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_ConnectionServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'FindContacts': grpc.unary_unary_rpc_method_handler(
+                    servicer.FindContacts,
+                    request_deserializer=udaconnect__pb2.FindContactsRequest.FromString,
+                    response_serializer=udaconnect__pb2.FindContactsResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'Connection', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class Connection(object):
+    """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def FindContacts(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Connection/FindContacts',
+            udaconnect__pb2.FindContactsRequest.SerializeToString,
+            udaconnect__pb2.FindContactsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
