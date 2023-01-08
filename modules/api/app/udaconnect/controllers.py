@@ -57,7 +57,7 @@ class PersonsResource(Resource):
 class PersonResource(Resource):
     @responds(schema=PersonSchema)
     def get(self, person_id) -> Person:
-        person: Person = PersonService.retrieve(person_id)
+        person: Person = PersonService.retrieve(int(person_id))
         return person
 
 

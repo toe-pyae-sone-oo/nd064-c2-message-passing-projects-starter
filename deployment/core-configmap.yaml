@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  CORE_PORT: "5005"
+  CORE_HOST: "udaconnect-core"
+metadata:
+  name: core-env

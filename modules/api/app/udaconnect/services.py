@@ -1,6 +1,8 @@
 import logging
 from datetime import datetime, timedelta
 from typing import Dict, List
+import grpc
+import os
 
 from app import db
 from app.udaconnect.models import Connection, Location, Person
@@ -8,9 +10,17 @@ from app.udaconnect.schemas import ConnectionSchema, LocationSchema, PersonSchem
 from geoalchemy2.functions import ST_AsText, ST_Point
 from sqlalchemy.sql import text
 
+import udaconnect_pb2
+import udaconnect_pb2_grpc
+
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("udaconnect-api")
 
+CORE_HOST = os.environ["CORE_HOST"]
+CORE_PORT = os.environ["CORE_PORT"]
+
+channel = grpc.insecure_channel(f"{CORE_HOST}:{CORE_PORT}")
+person_stub = udaconnect_pb2_grpc.PersonStub(channel)
 
 class ConnectionService:
     @staticmethod
@@ -126,8 +136,14 @@ class PersonService:
 
     @staticmethod
     def retrieve(person_id: int) -> Person:
-        person = db.session.query(Person).get(person_id)
-        return person
+        resp = person_stub.Get(udaconnect_pb2.GetPersonRequest(id=person_id))
+        return Person(
+            id=resp.data.id,
+            first_name=resp.data.first_name,
+            last_name=resp.data.last_name,
+            company_name=resp.data.company_name,
+        )
+
 
     @staticmethod
     def retrieve_all() -> List[Person]:
