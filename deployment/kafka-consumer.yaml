@@ -29,6 +29,21 @@ spec:
             configMapKeyRef:
               name: kafka-env
               key: KAFKA_TOPIC
+        - name: KAFKA_CONSUMER_GROUP
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-env
+              key: KAFKA_CONSUMER_GROUP
         - name: "PYTHONUNBUFFERED"
           value: "0"
+        - name: CORE_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: core-env
+              key: CORE_HOST
+        - name: CORE_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: core-env
+              key: CORE_PORT
       restartPolicy: Always

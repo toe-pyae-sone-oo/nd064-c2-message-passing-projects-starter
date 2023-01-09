@@ -40,7 +40,7 @@ spec:
           - name: KAFKA_PORT
             value: "9092"
           - name: KAFKA_CREATE_TOPICS
-            value: testing:1:1
+            value: create-new-location:1:1
           image: wurstmeister/kafka
           imagePullPolicy: IfNotPresent
           name: kafka-cluster

@@ -7,16 +7,14 @@ from models import (
     Location,
     Connection
 )
-from app import db
+from app import (db, logger)
 from geoalchemy2.functions import ST_Point
 from datetime import datetime, timedelta
 from sqlalchemy.sql import text
+import json
 
 KAFKA_SERVER = os.environ["KAFKA_SERVER"]
 TOPIC_NAME = os.environ["KAFKA_TOPIC"]
-
-logging.basicConfig(level=logging.WARNING)
-logger = logging.getLogger("udaconnect-core")
 
 producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER)
 
@@ -25,12 +23,6 @@ class PersonService:
     @staticmethod
     def retrieve(person_id: int) -> Person:
         person = db.session.query(Person).get(person_id)
-
-        producer.send(TOPIC_NAME, b"hello!")
-        producer.flush()
-
-        logger.info("message sent!")
-
         return person
     
     @staticmethod
@@ -72,7 +64,14 @@ class LocationService:
         db.session.add(new_location)
         db.session.commit()
 
+        logger.debug(f"new location created. location={new_location}")
+
         return new_location
+
+    @staticmethod
+    def async_create(location: Dict):
+        producer.send(TOPIC_NAME, bytes(json.dumps(location), 'utf-8'))
+        logger.debug("create location message sent!")
 
 class ConnectionService:
     

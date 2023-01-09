@@ -8,6 +8,7 @@ from udaconnect_pb2 import (
     CreateLocationResponse,
     ConnectionMessage,
     FindContactsResponse,
+    AsyncCreateLocationResponse,
 )
 import udaconnect_pb2_grpc
 from app import app
@@ -97,6 +98,16 @@ class LocationServicer(udaconnect_pb2_grpc.LocationServicer):
                     creation_time=int(location.creation_time.timestamp())
                 )
             )
+
+    def AsyncCreate(self, request, context):
+        with app.app_context():
+            LocationService.async_create({
+                "person_id": request.payload.person_id,
+                "creation_time": request.payload.creation_time,
+                "latitude": request.payload.latitude,
+                "longitude": request.payload.longitude,
+            })
+            return AsyncCreateLocationResponse()
 
 class ConnectionServicer(udaconnect_pb2_grpc.ConnectionServicer):
 

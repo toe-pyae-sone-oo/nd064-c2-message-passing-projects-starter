@@ -35,6 +35,7 @@ person_stub = PersonStub(channel)
 location_stub = LocationStub(channel)
 connection_stub = ConnectionStub(channel)
 
+
 def convert_location_message_to_model(message):
     location = Location(
         id=message.id,
