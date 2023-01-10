@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x10udaconnect.proto\"X\n\rPersonMessage\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x12\n\nfirst_name\x18\x02 \x01(\t\x12\x11\n\tlast_name\x18\x03 \x01(\t\x12\x14\n\x0c\x63ompany_name\x18\x04 \x01(\t\"\x1e\n\x10GetPersonRequest\x12\n\n\x02id\x18\x01 \x01(\x03\"1\n\x11GetPersonResponse\x12\x1c\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x0e.PersonMessage\"6\n\x13\x43reatePersonRequest\x12\x1f\n\x07payload\x18\x01 \x01(\x0b\x32\x0e.PersonMessage\"4\n\x14\x43reatePersonResponse\x12\x1c\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x0e.PersonMessage\"\x15\n\x13GetAllPersonRequest\"4\n\x14GetAllPersonResponse\x12\x1c\n\x04list\x18\x01 \x03(\x0b\x32\x0e.PersonMessage\"l\n\x0fLocationMessage\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x11\n\tperson_id\x18\x02 \x01(\x03\x12\x11\n\tlongitude\x18\x03 \x01(\t\x12\x10\n\x08latitude\x18\x04 \x01(\t\x12\x15\n\rcreation_time\x18\x05 \x01(\x03\" \n\x12GetLocationRequest\x12\n\n\x02id\x18\x01 \x01(\x03\"5\n\x13GetLocationResponse\x12\x1e\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x10.LocationMessage\"W\n\x11\x43onnectionMessage\x12\"\n\x08location\x18\x01 \x01(\x0b\x32\x10.LocationMessage\x12\x1e\n\x06person\x18\x02 \x01(\x0b\x32\x0e.PersonMessage\"`\n\x13\x46indContactsRequest\x12\x11\n\tperson_id\x18\x01 \x01(\x03\x12\x12\n\nstart_date\x18\x02 \x01(\t\x12\x10\n\x08\x65nd_date\x18\x03 \x01(\t\x12\x10\n\x08\x64istance\x18\x04 \x01(\x03\"<\n\x14\x46indContactsResponse\x12$\n\x08\x63ontacts\x18\x01 \x03(\x0b\x32\x12.ConnectionMessage2\xa4\x01\n\x06Person\x12,\n\x03Get\x12\x11.GetPersonRequest\x1a\x12.GetPersonResponse\x12\x35\n\x06\x43reate\x12\x14.CreatePersonRequest\x1a\x15.CreatePersonResponse\x12\x35\n\x06GetAll\x12\x14.GetAllPersonRequest\x1a\x15.GetAllPersonResponse2<\n\x08Location\x12\x30\n\x03Get\x12\x13.GetLocationRequest\x1a\x14.GetLocationResponse2I\n\nConnection\x12;\n\x0c\x46indContacts\x12\x14.FindContactsRequest\x1a\x15.FindContactsResponseb\x06proto3'
+  serialized_pb=b'\n\x10udaconnect.proto\"X\n\rPersonMessage\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x12\n\nfirst_name\x18\x02 \x01(\t\x12\x11\n\tlast_name\x18\x03 \x01(\t\x12\x14\n\x0c\x63ompany_name\x18\x04 \x01(\t\"\x1e\n\x10GetPersonRequest\x12\n\n\x02id\x18\x01 \x01(\x03\"1\n\x11GetPersonResponse\x12\x1c\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x0e.PersonMessage\"6\n\x13\x43reatePersonRequest\x12\x1f\n\x07payload\x18\x01 \x01(\x0b\x32\x0e.PersonMessage\"4\n\x14\x43reatePersonResponse\x12\x1c\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x0e.PersonMessage\"\x15\n\x13GetAllPersonRequest\"4\n\x14GetAllPersonResponse\x12\x1c\n\x04list\x18\x01 \x03(\x0b\x32\x0e.PersonMessage\"l\n\x0fLocationMessage\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x11\n\tperson_id\x18\x02 \x01(\x03\x12\x11\n\tlongitude\x18\x03 \x01(\t\x12\x10\n\x08latitude\x18\x04 \x01(\t\x12\x15\n\rcreation_time\x18\x05 \x01(\x03\" \n\x12GetLocationRequest\x12\n\n\x02id\x18\x01 \x01(\x03\"5\n\x13GetLocationResponse\x12\x1e\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x10.LocationMessage\":\n\x15\x43reateLocationRequest\x12!\n\x07payload\x18\x01 \x01(\x0b\x32\x10.LocationMessage\"8\n\x16\x43reateLocationResponse\x12\x1e\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x10.LocationMessage\"?\n\x1a\x41syncCreateLocationRequest\x12!\n\x07payload\x18\x01 \x01(\x0b\x32\x10.LocationMessage\"\x1d\n\x1b\x41syncCreateLocationResponse\"W\n\x11\x43onnectionMessage\x12\"\n\x08location\x18\x01 \x01(\x0b\x32\x10.LocationMessage\x12\x1e\n\x06person\x18\x02 \x01(\x0b\x32\x0e.PersonMessage\"`\n\x13\x46indContactsRequest\x12\x11\n\tperson_id\x18\x01 \x01(\x03\x12\x12\n\nstart_date\x18\x02 \x01(\t\x12\x10\n\x08\x65nd_date\x18\x03 \x01(\t\x12\x10\n\x08\x64istance\x18\x04 \x01(\x03\"<\n\x14\x46indContactsResponse\x12$\n\x08\x63ontacts\x18\x01 \x03(\x0b\x32\x12.ConnectionMessage2\xa4\x01\n\x06Person\x12,\n\x03Get\x12\x11.GetPersonRequest\x1a\x12.GetPersonResponse\x12\x35\n\x06\x43reate\x12\x14.CreatePersonRequest\x1a\x15.CreatePersonResponse\x12\x35\n\x06GetAll\x12\x14.GetAllPersonRequest\x1a\x15.GetAllPersonResponse2\xc1\x01\n\x08Location\x12\x30\n\x03Get\x12\x13.GetLocationRequest\x1a\x14.GetLocationResponse\x12\x39\n\x06\x43reate\x12\x16.CreateLocationRequest\x1a\x17.CreateLocationResponse\x12H\n\x0b\x41syncCreate\x12\x1b.AsyncCreateLocationRequest\x1a\x1c.AsyncCreateLocationResponse2I\n\nConnection\x12;\n\x0c\x46indContacts\x12\x14.FindContactsRequest\x1a\x15.FindContactsResponseb\x06proto3'
 )
 
 
@@ -387,6 +387,127 @@ _GETLOCATIONRESPONSE = _descriptor.Descriptor(
 )
 
 
+_CREATELOCATIONREQUEST = _descriptor.Descriptor(
+  name='CreateLocationRequest',
+  full_name='CreateLocationRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='payload', full_name='CreateLocationRequest.payload', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=579,
+  serialized_end=637,
+)
+
+
+_CREATELOCATIONRESPONSE = _descriptor.Descriptor(
+  name='CreateLocationResponse',
+  full_name='CreateLocationResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='data', full_name='CreateLocationResponse.data', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=639,
+  serialized_end=695,
+)
+
+
+_ASYNCCREATELOCATIONREQUEST = _descriptor.Descriptor(
+  name='AsyncCreateLocationRequest',
+  full_name='AsyncCreateLocationRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='payload', full_name='AsyncCreateLocationRequest.payload', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=697,
+  serialized_end=760,
+)
+
+
+_ASYNCCREATELOCATIONRESPONSE = _descriptor.Descriptor(
+  name='AsyncCreateLocationResponse',
+  full_name='AsyncCreateLocationResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=762,
+  serialized_end=791,
+)
+
+
 _CONNECTIONMESSAGE = _descriptor.Descriptor(
   name='ConnectionMessage',
   full_name='ConnectionMessage',
@@ -421,8 +542,8 @@ _CONNECTIONMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=579,
-  serialized_end=666,
+  serialized_start=793,
+  serialized_end=880,
 )
 
 
@@ -474,8 +595,8 @@ _FINDCONTACTSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=668,
-  serialized_end=764,
+  serialized_start=882,
+  serialized_end=978,
 )
 
 
@@ -506,8 +627,8 @@ _FINDCONTACTSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=766,
-  serialized_end=826,
+  serialized_start=980,
+  serialized_end=1040,
 )
 
 _GETPERSONRESPONSE.fields_by_name['data'].message_type = _PERSONMESSAGE
@@ -515,6 +636,9 @@ _CREATEPERSONREQUEST.fields_by_name['payload'].message_type = _PERSONMESSAGE
 _CREATEPERSONRESPONSE.fields_by_name['data'].message_type = _PERSONMESSAGE
 _GETALLPERSONRESPONSE.fields_by_name['list'].message_type = _PERSONMESSAGE
 _GETLOCATIONRESPONSE.fields_by_name['data'].message_type = _LOCATIONMESSAGE
+_CREATELOCATIONREQUEST.fields_by_name['payload'].message_type = _LOCATIONMESSAGE
+_CREATELOCATIONRESPONSE.fields_by_name['data'].message_type = _LOCATIONMESSAGE
+_ASYNCCREATELOCATIONREQUEST.fields_by_name['payload'].message_type = _LOCATIONMESSAGE
 _CONNECTIONMESSAGE.fields_by_name['location'].message_type = _LOCATIONMESSAGE
 _CONNECTIONMESSAGE.fields_by_name['person'].message_type = _PERSONMESSAGE
 _FINDCONTACTSRESPONSE.fields_by_name['contacts'].message_type = _CONNECTIONMESSAGE
@@ -528,6 +652,10 @@ DESCRIPTOR.message_types_by_name['GetAllPersonResponse'] = _GETALLPERSONRESPONSE
 DESCRIPTOR.message_types_by_name['LocationMessage'] = _LOCATIONMESSAGE
 DESCRIPTOR.message_types_by_name['GetLocationRequest'] = _GETLOCATIONREQUEST
 DESCRIPTOR.message_types_by_name['GetLocationResponse'] = _GETLOCATIONRESPONSE
+DESCRIPTOR.message_types_by_name['CreateLocationRequest'] = _CREATELOCATIONREQUEST
+DESCRIPTOR.message_types_by_name['CreateLocationResponse'] = _CREATELOCATIONRESPONSE
+DESCRIPTOR.message_types_by_name['AsyncCreateLocationRequest'] = _ASYNCCREATELOCATIONREQUEST
+DESCRIPTOR.message_types_by_name['AsyncCreateLocationResponse'] = _ASYNCCREATELOCATIONRESPONSE
 DESCRIPTOR.message_types_by_name['ConnectionMessage'] = _CONNECTIONMESSAGE
 DESCRIPTOR.message_types_by_name['FindContactsRequest'] = _FINDCONTACTSREQUEST
 DESCRIPTOR.message_types_by_name['FindContactsResponse'] = _FINDCONTACTSRESPONSE
@@ -603,6 +731,34 @@ GetLocationResponse = _reflection.GeneratedProtocolMessageType('GetLocationRespo
   })
 _sym_db.RegisterMessage(GetLocationResponse)
 
+CreateLocationRequest = _reflection.GeneratedProtocolMessageType('CreateLocationRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CREATELOCATIONREQUEST,
+  '__module__' : 'udaconnect_pb2'
+  # @@protoc_insertion_point(class_scope:CreateLocationRequest)
+  })
+_sym_db.RegisterMessage(CreateLocationRequest)
+
+CreateLocationResponse = _reflection.GeneratedProtocolMessageType('CreateLocationResponse', (_message.Message,), {
+  'DESCRIPTOR' : _CREATELOCATIONRESPONSE,
+  '__module__' : 'udaconnect_pb2'
+  # @@protoc_insertion_point(class_scope:CreateLocationResponse)
+  })
+_sym_db.RegisterMessage(CreateLocationResponse)
+
+AsyncCreateLocationRequest = _reflection.GeneratedProtocolMessageType('AsyncCreateLocationRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ASYNCCREATELOCATIONREQUEST,
+  '__module__' : 'udaconnect_pb2'
+  # @@protoc_insertion_point(class_scope:AsyncCreateLocationRequest)
+  })
+_sym_db.RegisterMessage(AsyncCreateLocationRequest)
+
+AsyncCreateLocationResponse = _reflection.GeneratedProtocolMessageType('AsyncCreateLocationResponse', (_message.Message,), {
+  'DESCRIPTOR' : _ASYNCCREATELOCATIONRESPONSE,
+  '__module__' : 'udaconnect_pb2'
+  # @@protoc_insertion_point(class_scope:AsyncCreateLocationResponse)
+  })
+_sym_db.RegisterMessage(AsyncCreateLocationResponse)
+
 ConnectionMessage = _reflection.GeneratedProtocolMessageType('ConnectionMessage', (_message.Message,), {
   'DESCRIPTOR' : _CONNECTIONMESSAGE,
   '__module__' : 'udaconnect_pb2'
@@ -633,8 +789,8 @@ _PERSON = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=829,
-  serialized_end=993,
+  serialized_start=1043,
+  serialized_end=1207,
   methods=[
   _descriptor.MethodDescriptor(
     name='Get',
@@ -679,8 +835,8 @@ _LOCATION = _descriptor.ServiceDescriptor(
   index=1,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=995,
-  serialized_end=1055,
+  serialized_start=1210,
+  serialized_end=1403,
   methods=[
   _descriptor.MethodDescriptor(
     name='Get',
@@ -689,6 +845,26 @@ _LOCATION = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETLOCATIONREQUEST,
     output_type=_GETLOCATIONRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Create',
+    full_name='Location.Create',
+    index=1,
+    containing_service=None,
+    input_type=_CREATELOCATIONREQUEST,
+    output_type=_CREATELOCATIONRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='AsyncCreate',
+    full_name='Location.AsyncCreate',
+    index=2,
+    containing_service=None,
+    input_type=_ASYNCCREATELOCATIONREQUEST,
+    output_type=_ASYNCCREATELOCATIONRESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
@@ -705,8 +881,8 @@ _CONNECTION = _descriptor.ServiceDescriptor(
   index=2,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1057,
-  serialized_end=1130,
+  serialized_start=1405,
+  serialized_end=1478,
   methods=[
   _descriptor.MethodDescriptor(
     name='FindContacts',

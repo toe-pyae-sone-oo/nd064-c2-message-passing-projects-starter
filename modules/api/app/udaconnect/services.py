@@ -16,6 +16,9 @@ from udaconnect_pb2 import (
     GetAllPersonRequest,
     GetLocationRequest,
     FindContactsRequest,
+    AsyncCreateLocationRequest,
+    PersonMessage,
+    LocationMessage,
 )
 from udaconnect_pb2_grpc import (
     PersonStub,
@@ -96,23 +99,27 @@ class LocationService:
             logger.warning(f"Unexpected data format in payload: {validation_results}")
             raise Exception(f"Invalid payload: {validation_results}")
 
-        new_location = Location()
-        new_location.person_id = location["person_id"]
-        new_location.creation_time = location["creation_time"]
-        new_location.coordinate = ST_Point(location["latitude"], location["longitude"])
-        db.session.add(new_location)
-        db.session.commit()
+        location_stub.AsyncCreate(AsyncCreateLocationRequest(
+            payload=LocationMessage(
+                person_id=location["person_id"],
+                creation_time=location["creation_time"],
+                latitude=location["latitude"],
+                longitude=location["longitude"],
+            )
+        ))
 
-        return new_location
+        return Location()
 
 
 class PersonService:
     @staticmethod
     def create(person: Dict) -> Person:
         resp = person_stub.Create(CreatePersonRequest(
-            first_name=person["first_name"],
-            last_name=person["last_name"],
-            company_name=person["company_name"],
+            payload=PersonMessage(
+                first_name=person["first_name"],
+                last_name=person["last_name"],
+                company_name=person["company_name"],
+            )
         ))
         return Person(
             id=resp.data.id,
