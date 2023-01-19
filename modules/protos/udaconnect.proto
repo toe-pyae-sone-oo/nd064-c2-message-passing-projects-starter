@@ -1,34 +1,5 @@
 syntax = "proto3";
 
-message PersonMessage {
-    int64 id = 1;
-    string first_name = 2;
-    string last_name = 3;
-    string company_name = 4;
-}
-
-message GetPersonRequest {
-    int64 id = 1;
-}
-
-message GetPersonResponse {
-    PersonMessage data = 1;
-}
-
-message CreatePersonRequest {
-    PersonMessage payload = 1;
-}
-
-message CreatePersonResponse {
-    PersonMessage data = 1;
-}
-
-message GetAllPersonRequest {}
-
-message GetAllPersonResponse {
-    repeated PersonMessage list = 1;
-}
-
 message LocationMessage {
     int64 id = 1;
     int64 person_id = 2;
@@ -37,56 +8,12 @@ message LocationMessage {
     int64 creation_time = 5;
 }
 
-message GetLocationRequest {
-    int64 id = 1;
-}
-
-message GetLocationResponse {
-    LocationMessage data = 1;
-}
-
 message CreateLocationRequest {
     LocationMessage payload = 1;
 }
 
-message CreateLocationResponse {
-    LocationMessage data = 1;
-}
-
-message AsyncCreateLocationRequest {
-    LocationMessage payload = 1;
-}
-
-message AsyncCreateLocationResponse {}
-
-message ConnectionMessage {
-    LocationMessage location = 1;
-    PersonMessage person = 2;
-}
-
-message FindContactsRequest {
-    int64 person_id = 1;
-    string start_date = 2;
-    string end_date = 3;
-    int64 distance = 4;
-}
-
-message FindContactsResponse {
-    repeated ConnectionMessage contacts = 1;
-}
-
-service Person {
-    rpc Get(GetPersonRequest) returns (GetPersonResponse);
-    rpc Create(CreatePersonRequest) returns (CreatePersonResponse);
-    rpc GetAll(GetAllPersonRequest) returns (GetAllPersonResponse);
-}
+message CreateLocationResponse {}
 
 service Location {
-    rpc Get(GetLocationRequest) returns (GetLocationResponse);
     rpc Create(CreateLocationRequest) returns (CreateLocationResponse);
-    rpc AsyncCreate(AsyncCreateLocationRequest) returns (AsyncCreateLocationResponse);
-}
-
-service Connection {
-    rpc FindContacts(FindContactsRequest) returns (FindContactsResponse);
 }
