@@ -13,6 +13,7 @@ consumer = KafkaConsumer(
     bootstrap_servers=KAFKA_SERVER,
     group_id=CONSUMER_GROUP,
 )
+
 for message in consumer:
     try:
         location = json.loads(message.value.decode("utf-8"))
