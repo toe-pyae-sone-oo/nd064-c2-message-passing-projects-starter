@@ -1,20 +1,5 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 import logging
 import sys
-
-
-db = SQLAlchemy()
-
-def create_app(env=None):
-    from config import config_by_name
-
-    app = Flask(__name__)
-    app.config.from_object(config_by_name[env or "test"])
-
-    db.init_app(app)
-    
-    return app
 
 def setup_logger():
     logging.basicConfig(level=logging.DEBUG)
@@ -34,7 +19,5 @@ def setup_logger():
     kafka_logger.setLevel(logging.WARN)
 
     return logger
-
-app = create_app()
 
 logger = setup_logger()
