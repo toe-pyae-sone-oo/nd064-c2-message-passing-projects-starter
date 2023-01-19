@@ -1,94 +1,22 @@
 Protos
 
-message GetPersonRequest {
+message LocationMessage {
     int64 id = 1;
-}
-
-message GetPersonResponse {
-    PersonMessage data = 1;
-}
-
-message CreatePersonRequest {
-    PersonMessage payload = 1;
-}
-
-message CreatePersonResponse {
-    PersonMessage data = 1;
-}
-
-message GetAllPersonRequest {}
-
-message GetAllPersonResponse {
-    repeated PersonMessage list = 1;
-}
-
-message GetLocationRequest {
-    int64 id = 1;
-}
-
-message GetLocationResponse {
-    LocationMessage data = 1;
+    int64 person_id = 2;
+    string longitude = 3;
+    string latitude = 4;
+    int64 creation_time = 5;
 }
 
 message CreateLocationRequest {
     LocationMessage payload = 1;
 }
 
-message CreateLocationResponse {
-    LocationMessage data = 1;
-}
-
-message AsyncCreateLocationRequest {
-    LocationMessage payload = 1;
-}
-
-message AsyncCreateLocationResponse {}
-
-message FindContactsRequest {
-    int64 person_id = 1;
-    string start_date = 2;
-    string end_date = 3;
-    int64 distance = 4;
-}
-
-message FindContactsResponse {
-    repeated ConnectionMessage contacts = 1;
-}
+message CreateLocationResponse {}
 
 --------------------------------------------------------
 
-Create a gRPC channel
-channel = grpc.insecure_channel(f"{CORE_HOST}:{CORE_PORT}")
-
-Person APIs
-
-Create a person stub
-stub = udaconnect_pb2_grpc.PersonStub(channel)
-
-To Create a person
-- Accepts `CreatePersonRequest`
-- Responses `CreatePersonResponse`
-stub.Create(udaconnect_pb2.CreatePersonRequest(
-    payload=udaconnect_pb2.PersonMessage(
-        first_name="",
-        last_name="",
-        company_name="",
-    )
-))
-
-To Find Person by ID
-- Accepts `GetPersonRequest`
-- Responses `GetPersonResponse`
-stub.Create(udaconnect_pb2.GetPersonRequest(id=0))
-
-To Find all persons
-- Accetps `GetAllPersonRequest`
-- Responses `GetAllPersonResponse`
-stub.Create(udaconnect_pb2.GetAllPersonRequest())
-
---------------------------------------------------------
-
-Location APIs
+APIs
 
 Create a location stub
 stub = udaconnect_pb2_grpc.LocationStub(channel)
@@ -104,37 +32,3 @@ stub.Create(udaconnect_pb2.CreateLocationRequest(
         longitude="",
     )
 ))
-
-To Create a location asynchronously
-- Accepts `AsyncCreateLocationRequest`
-- Responses `AsyncCreateLocationResponse`
-stub.Create(udaconnect_pb2.AsyncCreateLocationRequest(
-    payload=udaconnect_pb2.LocationMessage(
-        person_id=0,
-        creation_time=0,
-        latitude="",
-        longitude="",
-    )
-))
-
-To Get Location by ID
-- Accepts `GetLocationRequest`
-- Responses `GetLocationResponse`
-stub.Create(udaconnect_pb2.GetLocationRequest(id=0))
-
---------------------------------------------------------
-
-Conntection API
-
-Create a connection stub
-stub = udaconnect_pb2_grpc.ConnectionStub(channel)
-
-To Find Contacts
-- Accepts `FindContactsRequest`
-- Responses `FindContactsResponse`
-stub.FindContacts(udaconnect_pb2.FindContacts(FindContactsRequest(
-    person_id=0,
-    start_date="",
-    end_date="",
-    distance=0,
-)))

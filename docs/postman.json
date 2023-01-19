@@ -12,12 +12,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:30001/api/persons",
+					"raw": "http://localhost:30003/api/persons",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "30001",
+					"port": "30003",
 					"path": [
 						"api",
 						"persons"
@@ -32,12 +32,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:30001/api/persons/{{person_id}}",
+					"raw": "http://localhost:30003/api/persons/{{person_id}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "30001",
+					"port": "30003",
 					"path": [
 						"api",
 						"persons",
@@ -53,12 +53,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:30001/api/persons/{{person_id}}/connection?start_date={{start_date}}&end_date={{end_date}}&distance={{distance}}",
+					"raw": "http://localhost:30004/api/persons/{{person_id}}/connection?start_date={{start_date}}&end_date={{end_date}}&distance={{distance}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "30001",
+					"port": "30004",
 					"path": [
 						"api",
 						"persons",
@@ -119,44 +119,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:30001/api/persons",
+					"raw": "http://localhost:30003/api/persons",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "30001",
+					"port": "30003",
 					"path": [
 						"api",
 						"persons"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create Location",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"longitude\": \"37.55363\",\n\t\"person_id\": 6,\n\t\"creation_time\": \"2020-07-07T10:37:06\",\n\t\"latitude\": \"-122.290883\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:30001/api/locations",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "30001",
-					"path": [
-						"api",
-						"locations"
 					]
 				}
 			},

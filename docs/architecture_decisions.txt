@@ -1,28 +1,26 @@
 Components:
 - Frontend
-  - Handles UI and accepts user actions
+  - Handles UI and accepts user actions.
 
-- API
-  - Accepts requests from Frontend service. 
-  - Will act as a proxy and forward the requests to Core service.
+- Persons Service
+  - Handles query and create person requests using REST API.
 
-- Core
-  - Handles all the database logics.
+- Connections Service
+  - Handles request queries using REST API.
 
-- Consumer
-  - Receive messages from Kafka and calls Core service to do the actually task.
+- Locations Service
+  - Handles location request queries using REST API.
+
+- Location Writer
+  - Produces location creation requests through Kafka queue using gRPC message passing.
+
+- Location Consumer
+  - Consumes location creation requests from Kafka queue and store locations in database.
 
 Architecture Decision:
 
-- Frontend will call API service using the REST API message passing.
-  - It is customer facing. So, it's better to be less complex and better browser support.
+1. Created Persons, Connections Locations services using REST API because users will mainly access through website. Currently REST API is most suitable and less complexity for customer facing apps.
 
-- API service will call Core service using gRPC message passing.
-  - Since gRPC uses protobuf, data is structed before storing into database.
-  - Even though being more complex than the REST API to be used by clients, it will only be called by internal services.
-  - The messages being transferred as bytes is more efficient.
-  - So, I decided to use gRPC for internal message passing.
+2. Created LocationWriter using gRPC because many users will periodically send their current locations which can lead to high traffic. gRPC is more faster and efficient than REST because of tight packing of the Protocol Buffers and use of HTTP2.
 
-- Core service will asynchronously create locations using Kafka message passing.
-  - Since the users will send their current locations periodically, the QPS will be high.
-  - Adding a queue before storing into database, will avoid the bottleneck at the database.
+3. Used Kafka message to create locations to handle large volume of data from users. Writing message to Kafka is a lot of faster than writing to database because it is only appending to the next offset. The queue will buffer the huge insertions to the database.
