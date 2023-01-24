@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime
 
-from app import db  # noqa
+from app import db
 from geoalchemy2 import Geometry
 from geoalchemy2.shape import to_shape
 from shapely.geometry.point import Point
@@ -32,10 +32,8 @@ class Location(db.Model):
 
     @property
     def wkt_shape(self) -> str:
-        # Persist binary form into readable text
         if not self._wkt_shape:
             point: Point = to_shape(self.coordinate)
-            # normalize WKT returned by to_wkt() from shapely and ST_AsText() from DB
             self._wkt_shape = point.to_wkt().replace("POINT ", "ST_POINT")
         return self._wkt_shape
 

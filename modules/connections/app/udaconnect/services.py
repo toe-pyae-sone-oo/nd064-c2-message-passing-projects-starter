@@ -29,10 +29,8 @@ class ConnectionService:
             Location.creation_time >= start_date
         ).all()
 
-        # Cache all users in memory for quick lookup
         person_map: Dict[str, Person] = {person.id: person for person in PersonService.retrieve_all()}
 
-        # Prepare arguments for queries
         data = []
         for location in locations:
             data.append(

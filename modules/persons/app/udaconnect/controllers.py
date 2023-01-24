@@ -12,7 +12,7 @@ from typing import Optional, List
 
 DATE_FORMAT = "%Y-%m-%d"
 
-api = Namespace("UdaConnect", description="Connections via geolocation.")  # noqa
+api = Namespace("UdaConnect", description="Connections via geolocation.")
 
 @api.route("/persons")
 class PersonsResource(Resource):
